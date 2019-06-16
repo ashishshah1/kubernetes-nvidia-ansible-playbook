@@ -92,3 +92,9 @@ Where 'remote_host' is the ip or name of one of the computers in the cluster to 
 
 [The installation instructions for your OS can be found here](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 
+[You will also likely need to install python and python pip](https://www.python.org/downloads/)
+
+You don't need to install ansible on the cluster machines
+
+## Step 3. Clone this repo and edit the hosts file
+Ansible works by sending the commands to a number of machines defined in a hosts file. Clone this repo (if you haven't already) and edit the hosts file to correspond to the ip addresses of the machines in your cluster
