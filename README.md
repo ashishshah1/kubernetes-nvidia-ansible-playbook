@@ -9,14 +9,14 @@ This guide assumes you're usuing ubuntu 18.04. The playbook may need some editin
 
 In order for ansible to work you only need to enable ssh login via root using a key. You don't need to install ansible on any machine other than the one you're working on, which can be your personal computer outside your cluster.
 
-First, on each of the machines in your cluster install and enable openssh (to allow you to ssh into the machines).
+1. First, on each of the machines in your cluster install and enable openssh (to allow you to ssh into the machines).
 
 ~~~~
 sudo apt-get update
 sudo apt-get install openssh-server
 ~~~~
 
-Second, allow the ability to ssh into the machines as root
+2. Second, allow the ability to ssh into the machines as root
 
 On each machine input:
 ~~~~
