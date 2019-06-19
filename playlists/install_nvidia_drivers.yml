@@ -1,0 +1,13 @@
+---
+- hosts: gpu_workstations
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "before we run our role"
+  - import_role:
+      name: nvidia_driver
+  - include_role:
+      name: nvidia_driver
+  - debug:
+      msg: "after we ran our role"

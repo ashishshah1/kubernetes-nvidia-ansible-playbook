@@ -98,3 +98,33 @@ You don't need to install ansible on the cluster machines
 
 ## Step 3. Clone this repo and edit the hosts file
 Ansible works by sending the commands to a number of machines defined in a hosts file. Clone this repo (if you haven't already) and edit the hosts file to correspond to the ip addresses of the machines in your cluster
+
+To test that your workstations are reachable by ansible try:
+
+~~~~
+ansible -i hosts -u root gpu_workstations -m ping
+~~~~
+
+Expected output should be:
+
+~~~~
+myworkstation | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    }, 
+    "changed": false, 
+    "ping": "pong"
+}
+~~~~
+
+## Step 4. Install the nvidia drivers
+
+~~~~
+ansible-playbook -i playlists/hosts playlists/install_nvidia_drivers.yml
+~~~~
+
+## Step 5. Install docker 
+
+~~~~
+ansible-playbook -i playlists/hosts playlists/install_docker.yml
+~~~~

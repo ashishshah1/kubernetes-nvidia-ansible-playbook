@@ -5,8 +5,6 @@
     state: absent
 
 - name: add key
-  roles:
-    nvidia_driver
   apt_key:
     url: "{{ nvidia_driver_ubuntu_cuda_repo_gpgkey_url }}"
     id: "{{ nvidia_driver_ubuntu_cuda_repo_gpgkey_id }}"
