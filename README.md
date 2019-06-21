@@ -117,6 +117,13 @@ myworkstation | SUCCESS => {
 }
 ~~~~
 
+## Give it to me now!
+If you're the type of person who likes to live life on the cutting edge, you can try and install / activate all the components at once with
+
+~~~~
+ansible-playbook -i playlists/hosts playlists/install_all.yml
+~~~~
+
 ## Step 4. Install the nvidia drivers
 
 ~~~~
