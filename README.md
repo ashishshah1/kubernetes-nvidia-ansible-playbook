@@ -124,6 +124,7 @@ If you're the type of person who likes to live life on the cutting edge, you can
 ansible-playbook -i playlists/hosts playlists/install_all.yml
 ~~~~
 
+If your the type to take life as it comes, or if you already have some of these things installed (i.e nvidia drivers) then you can run them step by step in the following order. The install_all.yml file is just all these steps copy pasta into one file, so you wont miss out on anything fun.
 ## Step 4. Install the nvidia drivers
 
 ~~~~
