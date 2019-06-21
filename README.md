@@ -128,3 +128,27 @@ ansible-playbook -i playlists/hosts playlists/install_nvidia_drivers.yml
 ~~~~
 ansible-playbook -i playlists/hosts playlists/install_docker.yml
 ~~~~
+
+## Step 6. Install nvidia-docker 2
+
+~~~~
+ansible-playbook -i playlists/hosts playlists/install_nvidia_docker.yml
+~~~~
+
+## Step 7 Install kubernetes on all nodes
+
+~~~~
+ansible-playbook -i playlists/hosts playlists/install_kubernetes.yml
+~~~~
+
+## Step 8. Start the kubernetes cluster on master
+
+~~~~
+ansible-playbook -i playlists/hosts playlists/start_kubernetes.yml
+~~~~
+
+## Step 9. Add the nvidia device plugin
+
+~~~~
+ansible-playbook -i playlists/hosts playlists/install_gpu_device_plugin.yml
+~~~~

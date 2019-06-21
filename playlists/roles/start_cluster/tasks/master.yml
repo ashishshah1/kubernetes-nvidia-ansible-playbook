@@ -1,0 +1,39 @@
+---
+
+- name: remove swap from fstab
+  lineinfile: path=/etc/fstab regexp='swap' state=absent
+  
+- name: Disable Swap
+  command: swapoff -a
+
+- name: Check if kubeadm has already run
+  stat:
+    path: "/etc/kubernetes/pki/ca.key"
+  register: kubeadm_ca
+
+- name: Start cluster on master
+  command: kubeadm init {{ pod_network }}
+  when: not kubeadm_ca.stat.exists
+
+- name: Make kube directory
+  command: mkdir -p /root/.kube/
+
+- name: "Copy config file"
+  command: cp /etc/kubernetes/admin.conf /root/.kube/config
+
+- name: "Change ownership of kube directory"
+  command: chown -R "root:root" "/root/.kube"
+
+- name: Test if nodes are found
+  command: kubectl get nodes
+  register: result
+
+- debug: msg="{{ result.stdout }}"
+
+- name: Generate join command
+  command: kubeadm token create --print-join-command
+  register: join_command
+
+- name: Copy join command to local file
+  sudo: no 
+  local_action: copy content="{{ join_command.stdout_lines[0] }}" dest="./roles/start_cluster/files/join_command.txt"

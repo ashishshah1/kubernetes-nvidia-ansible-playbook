@@ -1,0 +1,5 @@
+- name: Test if nodes are found
+  command: kubectl get nodes
+  register: result
+
+- debug: msg="{{ result.stdout }}"

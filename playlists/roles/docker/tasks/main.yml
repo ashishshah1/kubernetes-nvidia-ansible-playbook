@@ -1,3 +1,7 @@
+- name: Clean the apt repo
+  command: apt-get clean
+  become: yes
+
 - name: Update apt cache if not done so recently
   apt:
     update_cache: yes
@@ -20,7 +24,7 @@
 
 - name: add repo
   apt_repository:
-    repo: "deb {{ docker_repo_base_url }} /"
+    repo: "deb {{ docker_repo_base_url2 }}"
     update_cache: yes
 
 - name: Install Docker

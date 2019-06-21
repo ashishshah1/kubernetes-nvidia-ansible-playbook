@@ -1,0 +1,11 @@
+---
+- hosts: all
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "Installing kubernetes on all machines"
+  - import_role:
+      name: kubernetes
+  - debug:
+      msg: "Kubernetes install finished on machines!"

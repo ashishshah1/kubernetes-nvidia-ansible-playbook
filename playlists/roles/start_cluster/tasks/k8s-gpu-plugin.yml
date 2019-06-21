@@ -1,0 +1,8 @@
+- name: Install Helm
+  shell: curl -L https://git.io/get_helm.sh | bash
+
+- name: Add Flannel
+  command: kubectl apply -f "{{flannel_url}}"
+
+- name: Add device plugin
+  command: kubectl apply -f "{{nvidia_device_plugin}}"

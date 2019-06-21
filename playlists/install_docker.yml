@@ -1,13 +1,11 @@
 ---
-- hosts: gpu_workstations
+- hosts: all
   user: root
   become: yes
   tasks:
   - debug:
       msg: "Installing docker ..."
   - import_role:
-      name: docker
-  - include_role:
       name: docker
   - debug:
       msg: "Docker install finished!"

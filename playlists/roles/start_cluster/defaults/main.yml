@@ -1,0 +1,7 @@
+pod_network: --pod-network-cidr=10.244.0.0/16
+
+kube_file_path: "/home/kube_master/.kube"
+kube_config_path: "/home/kube_master/.kube/config"
+
+
+kube_admin_file: "/etc/kubernetes/admin.conf"

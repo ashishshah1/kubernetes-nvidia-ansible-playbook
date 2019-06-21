@@ -1,0 +1,26 @@
+- name: Clean the apt repo
+  command: apt-get clean
+  become: yes
+
+- name: add key
+  apt_key:
+    url: "{{ nvidia_docker_key }}"
+
+- name: "Get nvidia docker list file"
+  command: "curl -s -L {{nvidia_docker_list}} -o /etc/apt/sources.list.d/nvidia-docker.list"
+
+- name: Update apt cache 
+  apt:
+    update_cache: yes
+
+- name: Install nvidia docker 2
+  apt:
+    name: "nvidia-docker2"
+
+- name: Make nvidia docker default
+  copy:
+    src: ./roles/start_cluster/files/daemon.json
+    dest: /etc/docker/daemon.json
+    
+- name: "Restart docker for changes to take effect"
+  command: "pkill -SIGHUP dockerd"

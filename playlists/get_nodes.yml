@@ -1,0 +1,11 @@
+- hosts: master
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "Get nodes ..."
+  - import_role:
+      name: start_cluster
+      tasks_from: test
+  - debug:
+      msg: "Done!"

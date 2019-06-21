@@ -1,0 +1,83 @@
+---
+- hosts: gpu_workstations
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "before we run our role"
+  - import_role:
+      name: nvidia_driver
+  - include_role:
+      name: nvidia_driver
+  - debug:
+      msg: "after we ran our role"
+
+- hosts: all
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "Installing docker ..."
+  - import_role:
+      name: docker
+  - debug:
+      msg: "Docker install finished!"
+
+- hosts: gpu_workstations
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "Installing nvidia docker ..."
+  - import_role:
+      name: nvidia_docker
+  - debug:
+      msg: "Nvidia Docker install finished!"
+
+- hosts: all
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "Installing kubernetes on all machines"
+  - import_role:
+      name: kubernetes
+  - debug:
+      msg: "Kubernetes install finished on machines!"
+
+- hosts: master
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "Starting k8s cluster on master ..."
+  - import_role:
+      name: start_cluster
+      tasks_from: master
+  - debug:
+      msg: "Cluster started!"
+
+- hosts: gpu_workstations
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "Starting k8s cluster on workers ..."
+  - import_role:
+      name: start_cluster
+      tasks_from: workers
+  - debug:
+      msg: "Cluster started!"
+
+- hosts: master
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "Installing GPU device plugin"
+  - import_role:
+      name: start_cluster
+      tasks_from: k8s-gpu-plugin
+
+  - debug:
+      msg: "GPU device plugin installed!"

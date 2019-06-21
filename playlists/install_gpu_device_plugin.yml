@@ -1,0 +1,14 @@
+---
+
+- hosts: master
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "Installing GPU device plugin"
+  - import_role:
+      name: start_cluster
+      tasks_from: k8s-gpu-plugin
+
+  - debug:
+      msg: "GPU device plugin installed!"

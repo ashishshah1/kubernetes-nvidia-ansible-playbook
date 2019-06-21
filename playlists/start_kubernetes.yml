@@ -1,0 +1,26 @@
+---
+
+
+- hosts: master
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "Starting k8s cluster on master ..."
+  - import_role:
+      name: start_cluster
+      tasks_from: master
+  - debug:
+      msg: "Cluster started!"
+
+- hosts: gpu_workstations
+  user: root
+  become: yes
+  tasks:
+  - debug:
+      msg: "Starting k8s cluster on workers ..."
+  - import_role:
+      name: start_cluster
+      tasks_from: workers
+  - debug:
+      msg: "Cluster started!"

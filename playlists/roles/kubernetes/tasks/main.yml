@@ -1,0 +1,34 @@
+- name: Clean apt
+  command: apt-get clean
+  become: yes
+
+- name: Update apt cache 
+  apt:
+    update_cache: yes
+
+- name: Install transport https
+  apt: 
+    name: apt-transport-https
+
+- name: Add GPG key
+  apt_key: 
+    url: "{{ gpg_key_url }}"
+    state: present
+
+- name: Append to sources list
+  shell: echo {{ apt_kube_key }} >> {{ kubernetes_sources_file }}
+  args:
+    executable: /bin/bash
+
+- name: Update apt cache 
+  apt:
+    update_cache: yes
+
+- name: Install kubernests
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - kubelet 
+    - kubeadm 
+    - kubectl

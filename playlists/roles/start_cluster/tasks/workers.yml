@@ -1,0 +1,8 @@
+- name: remove swap from fstab
+  lineinfile: path=/etc/fstab regexp='swap' state=absent
+  
+- name: Disable Swap
+  command: swapoff -a
+
+- name: Join cluster
+  command: "{{ lookup('file', './roles/start_cluster/files/join_command.txt') }}"
