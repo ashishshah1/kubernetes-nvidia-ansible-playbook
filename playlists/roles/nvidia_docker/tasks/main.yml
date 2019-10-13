@@ -19,7 +19,7 @@
 
 - name: Make nvidia docker default
   copy:
-    src: ./roles/start_cluster/files/daemon.json
+    src: ./roles/nvidia_docker/files/daemon.json
     dest: /etc/docker/daemon.json
     
 - name: "Restart docker for changes to take effect"

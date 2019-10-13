@@ -6,3 +6,4 @@
 
 - name: Join cluster
   command: "{{ lookup('file', './roles/start_cluster/files/join_command.txt') }}"
+  ignore_errors: yes

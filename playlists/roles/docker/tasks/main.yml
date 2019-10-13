@@ -32,6 +32,5 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - docker-ce 
-    - docker-ce-cli 
+    - docker-ce=5:18.09.9~3-0~ubuntu-bionic
     - containerd.io
