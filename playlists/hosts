@@ -1,5 +1,7 @@
 [master]
-
+dean-master
 
 [gpu_workstations]
+dean-moab
+dean-old-pc
 
